@@ -8,19 +8,21 @@ require('dotenv').config({path:'.././.env'});
 
 app.use(cors());
 
-
 if(process.argv.length>4){
+
     var PORT = process.env.BROKERPORT;
     var envtt = process.argv[2].split('=');
     var envport = process.argv[3].split('=');
-    var TESTTOPIC=envtt;
+
+    var TESTTOPIC=envtt[1];
     var message = process.argv[4];
     var MES = message;
     var PORT1=parseInt(envport[1]);
 }
 else{
-    throw new Error('Enter Command like : node producerindex.js TESTTOPIC="myTopic" PORT=8081 "Hello, this is a test message"');
+    throw new Error('Enter Command like : node producerindex.js TESTTOPIC="myTopic" PORT=8080 "Hello Message"');
 }
+
 
 
 

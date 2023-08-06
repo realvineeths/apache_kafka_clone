@@ -14,7 +14,7 @@ if(process.argv.length>=4){
         from_beg = true;
     }
     var PORT = parseInt(envport[1]);
-    var TESTTOPIC = envtt;
+    var TESTTOPIC = envtt[1];
 }
 else{
     throw new Error('Enter Command like : node consumerindex.js TESTTOPIC="myTopic" PORT=8081 --from-beginning');
