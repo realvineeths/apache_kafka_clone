@@ -7,22 +7,21 @@ require('dotenv').config({path:'.././.env'});
 
 
 app.use(cors());
-var PORT1 = 6000;
-// var PORT = 5000;
-var PORT = process.env.BROKERPORT;
 
-var TESTTOPIC = 'two';
-var MES = "Heyyy f U";
 
-var envtt = process.argv[2].split('=');
-var envport = process.argv[3].split('=');
+if(process.argv.length>4){
+    var PORT = process.env.BROKERPORT;
+    var envtt = process.argv[2].split('=');
+    var envport = process.argv[3].split('=');
+    var TESTTOPIC=envtt;
+    var message = process.argv[4];
+    var MES = message;
+    var PORT1=parseInt(envport[1]);
+}
+else{
+    throw new Error('Enter Command like : node producerindex.js TESTTOPIC="myTopic" PORT=8081 "Hello, this is a test message"');
+}
 
-TESTTOPIC=envtt;
-var message = process.argv[4];
-MES = message;
-PORT1=parseInt(envport[1]);
-console.log(envtt[1], parseInt(envport[1]));
-console.log(MES);
 
 
 app.listen(PORT1, (req, res) => {

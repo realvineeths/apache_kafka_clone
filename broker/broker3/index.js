@@ -18,10 +18,10 @@ const connection=mongoose.connect('mongodb://localhost:27017/broker')
 app.use(cors())
 app.use(express.json())
 
-app.use((req,res,next)=>{
-    console.log(req.session);
-    next();
-})
+// app.use((req,res,next)=>{
+//     console.log(req.session);
+//     next();
+// })
 
 
 
@@ -33,8 +33,8 @@ app.post('/api/producer',(req,res)=>{
 
     var name=req.query.testtopic;
     const {message}=req.body; 
-    console.log('message',message);
-    console.log('name',name);
+    // console.log('message',message);
+    // console.log('name',name);
 
     var establishedModels = {};
     function createModelForName(name) {
@@ -50,7 +50,7 @@ app.post('/api/producer',(req,res)=>{
         return establishedModels[name];
     
     }
-    console.log(establishedModels);
+    // console.log(establishedModels);
 
     var Model = createModelForName(name); // Create the model.
     var model = Model({message}); // Create a model instance.
@@ -60,7 +60,7 @@ app.post('/api/producer',(req,res)=>{
         }
     });    
     
-    console.log('arrayyy',globalobj);
+    // console.log('arrayyy',globalobj);
 
     for(port in globalobj[name])
     {
@@ -76,7 +76,7 @@ app.post('/api/producer',(req,res)=>{
     }
 
 
-    console.log('added..');
+    // console.log('added..');
     res.send('done');
 })
 
@@ -106,7 +106,7 @@ app.get('/portmessage',(req,res)=>{
     var Model = createModelForName(testtopicname); // Create the model.
 
 
-    console.log(portnum,testtopicname,allflag);
+    // console.log(portnum,testtopicname,allflag);
 
 
 
@@ -118,7 +118,7 @@ app.get('/portmessage',(req,res)=>{
     else{
         globalobj[testtopicname].push(parseInt(portnum));
     }
-    console.log('array',globalobj);
+    // console.log('array',globalobj);
 
     if(allflag==='true')
     {

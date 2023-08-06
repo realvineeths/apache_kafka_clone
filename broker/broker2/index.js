@@ -18,10 +18,10 @@ const connection=mongoose.connect('mongodb://localhost:27017/broker')
 app.use(cors())
 app.use(express.json())
 
-app.use((req,res,next)=>{
-    console.log(req.session);
-    next();
-})
+// app.use((req,res,next)=>{
+//     console.log(req.session);
+//     next();
+// })
 
 // var portnum=8888;
 
@@ -35,8 +35,8 @@ app.post('/api/producer',(req,res)=>{
 
     var name=req.query.testtopic;
     const {message}=req.body; 
-    console.log('message',message);
-    console.log('name',name);
+    // console.log('message',message);
+    // console.log('name',name);
 
     var establishedModels = {};
     function createModelForName(name) {
@@ -52,7 +52,7 @@ app.post('/api/producer',(req,res)=>{
         return establishedModels[name];
     
     }
-    console.log(establishedModels);
+    // console.log(establishedModels);
 
     var Model = createModelForName(name); // Create the model.
     var model = Model({message}); // Create a model instance.
@@ -62,12 +62,12 @@ app.post('/api/producer',(req,res)=>{
         }
     });    
     
-    console.log('arrayyy',globalobj);
+    // console.log('arrayyy',globalobj);
 
     for(port in globalobj[name])
     {   
-        console.log('port names',name,port);
-        console.log('port numbers',globalobj[name][port]);
+        // console.log('port names',name,port);
+        // console.log('port numbers',globalobj[name][port]);
         try{
             fetch(`http://localhost:${globalobj[name][port]}/message?mess=${message}`)
             .then(data => console.log(data));
@@ -79,7 +79,7 @@ app.post('/api/producer',(req,res)=>{
     }
 
 
-    console.log('added..');
+    // console.log('added..');
     res.send('done');
 })
 

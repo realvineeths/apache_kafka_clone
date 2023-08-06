@@ -5,18 +5,21 @@ const fetch = require("node-fetch");
 require('dotenv').config({path:'.././.env'});
 
 
-var PORT = 8888
+if(process.argv.length>=4){
 
-var TESTTOPIC = 'two'
-var envtt = process.argv[2].split('=');
-var envport = process.argv[3].split('=');
-var from_beg = false;
-if (process.argv.length == 5 && process.argv[4] == '--from-beginning') {
-    from_beg = true;
+    var envtt = process.argv[2].split('=');
+    var envport = process.argv[3].split('=');
+    var from_beg = false;
+    if (process.argv.length == 5 && process.argv[4] == '--from-beginning') {
+        from_beg = true;
+    }
+    var PORT = parseInt(envport[1]);
+    var TESTTOPIC = envtt;
 }
-// console.log(envtt[1], parseInt(envport[1]));
-PORT = parseInt(envport[1]);
-TESTTOPIC = envtt;
+else{
+    throw new Error('Enter Command like : node consumerindex.js TESTTOPIC="myTopic" PORT=8081 --from-beginning');
+}
+
 app.get('/message', (req, res) => {
     const mess = req.query.mess;
     console.log(mess);
